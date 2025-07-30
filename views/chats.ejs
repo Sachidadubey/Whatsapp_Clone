@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Clone</title>
+</head>
+
+<body>
+  <h3 class="greetings">📱 Welcome to WhatsApp Clone</h3>
+
+  <!-- 🔘 New Chat Button -->
+  <div class="btn-container">
+    <a href="/chats/new" class="new-chat-btn">➕ New Chat</a>
+  </div>
+
+  <div class="chat-container">
+    <% for(let chat of chats) { %>
+      <div class="chat-card">
+        <div class="chat-header">
+          <span class="from">📤 From: <%= chat.from %></span>
+          <span class="to">📥 To: <%= chat.to %></span>
+        </div>
+
+        <div class="chat-message">
+          <p>
+            <%= chat.msg %>
+          </p>
+        </div>
+
+        <!-- ✏️ 🗑️ Buttons inside the card -->
+        <div class="card-buttons">
+          <a class="edit-btn" href="/chats/<%= chat._id %>/edit">✏️ Edit</a>
+          <a class="delete-btn" href="/chats/<%= chat._id %>/delete"
+            onclick="return confirm('Are you sure you want to delete this chat?')">🗑️ Delete</a>
+        </div>
+      </div>
+      <% } %>
+  </div>
+
+</body>
+
+</html>
