@@ -7,7 +7,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public")));
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
-
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
 
 
 
@@ -46,7 +47,6 @@ app.get("/chats", async (req, res) => {
 
 
 
-
 app.get("/", (req, res) => {
   res.send("port working well");
 });
@@ -69,28 +69,25 @@ app.post("/chats", async (req, res) => {
   res.redirect("/chats");
 });
 // edit 
-app.get("/chats/:id/edit", async (req, res) => {
+app.get("/chats/:id", async (req, res) => {
   let { id } = req.params;
   let chat = await Chat.findById(id);
   res.render("edit.ejs", { chat });
 });
 
 //update
-app.post("/chats/:id/update", async (req, res) => {
+app.put("/chats/:id", async (req, res) => {
   let { id } = req.params;
-  let { from, to, msg } = req.body;
-  await Chat.findByIdAndUpdate(id, { from, to, msg });
+  let { msg:newmsg } = req.body;
+  await Chat.findByIdAndUpdate(id, { msg:newmsg },{runValidators:true, new:true});
   res.redirect("/chats");
 });
 // delete
-app.get("/chats/:id/delete", async (req, res) => {
+app.delete("/chats/:id", async (req, res) => {
   let { id } = req.params;
   await Chat.findByIdAndDelete(id);
   res.redirect("/chats");
 });
-
-
-
 
 
 

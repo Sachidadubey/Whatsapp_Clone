@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const chatScema = new mongoose.Schema({
+const chatSchema = new mongoose.Schema({
   from: {
     type: String,
     required: true
@@ -17,5 +17,5 @@ const chatScema = new mongoose.Schema({
     required: true
   }
 });
-const Chat = mongoose.model("Chat", chatScema);
+const Chat = mongoose.model("Chat", chatSchema);
 module.exports = Chat;

@@ -6,15 +6,14 @@
   <link rel="stylesheet" href="/style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edit Chat</title>
-  <link rel="stylesheet" href="edit.css">
+  <link rel="stylesheet" href="/edit.css">
 </head>
 
 <body>
   <div class="form-container">
     <h2>Edit Chat</h2>
-    <form action="/chats/<%= chat._id %>/update" method="POST">
-      <input type="text" name="from" value="<%= chat.from %>" required />
-      <input type="text" name="to" value="<%= chat.to %>" required />
+    <form method="post" action="/chats/<%= chat._id %>?_method=PUT">
+      <p>MESSAGE IS SENT FROM <b><%= chat.from %></b>to <b><%= chat.to %></b></p>
       <textarea name="msg" required><%= chat.msg %></textarea>
       <button type="submit">Update Chat</button>
     </form>
